@@ -685,72 +685,18 @@
     <h2 class="section-title">Conferma Presenza · RSVP</h2>
     <div class="section-sub">Compila il modulo qui sotto — è fondamentale per l'organizzazione!</div>
 
-    <form class="rsvp-form" id="rsvp-form">
-      <div class="form-group">
-        <label for="name">Nome e Cognome</label>
-        <input type="text" id="name" name="name" placeholder="Il tuo nome completo" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="la-tua@email.com" required>
-      </div>
-
-      <div class="form-group">
-        <label>Sarai presente?</label>
-        <div class="radio-group">
-          <label class="radio-option">
-            <input type="radio" name="attending" value="Sì, con gioia!" required>
-            <span>Sì, con gioia!</span>
-          </label>
-          <label class="radio-option">
-            <input type="radio" name="attending" value="Purtroppo no">
-            <span>Purtroppo no</span>
-          </label>
-        </div>
-      </div>
-
-      <div class="form-group" id="guest-count-group">
-        <label for="guests">Numero di ospiti (te compreso/a)</label>
-        <select id="guests" name="guests">
-          <option value="1">1</option>
-          <option value="2" selected>2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-
-      <div class="form-group" id="guest-names-group">
-        <label for="guest_names">Nomi degli accompagnatori</label>
-        <input type="text" id="guest_names" name="guest_names" placeholder="es. Maria Rossi, Paolo Rossi">
-      </div>
-
-      <div class="form-group" id="dietary-group">
-        <label for="dietary">Allergie o esigenze alimentari</label>
-        <textarea id="dietary" name="dietary" placeholder="Vegetariano, vegano, senza glutine, allergie..."></textarea>
-      </div>
-
-      <div class="form-group" id="hotel-group">
-        <label for="hotel_rooms">Avete bisogno di una camera d'albergo?</label>
-        <select id="hotel_rooms" name="hotel_rooms">
-          <option value="No">No, grazie</option>
-          <option value="1">Sì, 1 camera</option>
-          <option value="2">Sì, 2 camere</option>
-          <option value="3">Sì, 3 camere</option>
-          <option value="4">Sì, 4 camere</option>
-          <option value="5">Sì, 5 camere</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Messaggio per gli sposi (opzionale)</label>
-        <textarea id="message" name="message" placeholder="Un pensiero, una richiesta musicale, o semplicemente un saluto..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-rsvp" id="btn-submit">Invia Conferma</button>
-      <div class="form-status" id="form-status"></div>
-    </form>
+    <iframe id="ms-form-iframe"
+      src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__ZqbFXNURUNGUVZGS0pBN1VYNkZZOVJURkQwTDZBNy4u&embed=true"
+      style="width:100%;min-height:900px;border:none;border-radius:12px;background:transparent;"
+      allowfullscreen>
+    </iframe>
+    <p style="text-align:center;margin-top:16px;">
+      <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__ZqbFXNURUNGUVZGS0pBN1VYNkZZOVJURkQwTDZBNy4u"
+         target="_blank" rel="noopener"
+         style="color:var(--gold);font-size:14px;text-decoration:underline;">
+        Se il modulo non si carica, clicca qui per aprirlo →
+      </a>
+    </p>
 
     <div class="contact-bar" style="margin-top:24px;">
       <p style="color:#a09888;">Per ulteriori informazioni:</p>
@@ -841,84 +787,7 @@
 
 
 
-  /* ── Show/hide conditional RSVP fields ── */
-  var attendRadios = document.querySelectorAll('input[name="attending"]');
-  var conditionalGroups = ['guest-count-group', 'guest-names-group', 'dietary-group', 'hotel-group'];
-  attendRadios.forEach(function(r) {
-    r.addEventListener('change', function() {
-      var show = this.value.indexOf('gioia') >= 0;
-      conditionalGroups.forEach(function(id) {
-        document.getElementById(id).style.display = show ? 'block' : 'none';
-      });
-    });
-  });
 
-  /* ── Sync hotel room dropdown with guest count ── */
-  document.getElementById('guests').addEventListener('change', function() {
-    var max = parseInt(this.value);
-    var hotelSelect = document.getElementById('hotel_rooms');
-    var currentVal = hotelSelect.value;
-    hotelSelect.innerHTML = '<option value="No">No, grazie</option>';
-    for (var i = 1; i <= max; i++) {
-      var opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = 'Sì, ' + i + (i === 1 ? ' camera' : ' camere');
-      hotelSelect.appendChild(opt);
-    }
-    if (currentVal !== 'No' && parseInt(currentVal) <= max) {
-      hotelSelect.value = currentVal;
-    }
-  });
-
-  /* ── RSVP → FormSubmit.co (email to lukhouse@hotmail.it) ── */
-  document.getElementById('rsvp-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    var btn = document.getElementById('btn-submit');
-    var status = document.getElementById('form-status');
-    btn.disabled = true;
-    btn.textContent = 'Invio in corso...';
-    status.className = 'form-status';
-    status.textContent = '';
-
-    var attendVal = document.querySelector('input[name="attending"]:checked');
-
-    var payload = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      attending: attendVal ? attendVal.value : '',
-      guests: document.getElementById('guests').value,
-      guest_names: document.getElementById('guest_names').value,
-      dietary: document.getElementById('dietary').value,
-      hotel_rooms: document.getElementById('hotel_rooms').value,
-      message: document.getElementById('message').value,
-      _subject: 'RSVP Matrimonio: ' + document.getElementById('name').value,
-      _template: 'table'
-    };
-
-    fetch('https://formsubmit.co/ajax/lukhouse@hotmail.it', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function(response) {
-      return response.json();
-    }).then(function(data) {
-      if (data.success) {
-        status.className = 'form-status success';
-        status.textContent = '\uD83C\uDF89 Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te!';
-        btn.textContent = '\u2713 Inviato!';
-        document.getElementById('rsvp-form').reset();
-        setTimeout(function() { btn.disabled = false; btn.textContent = 'Invia Conferma'; }, 5000);
-      } else {
-        throw new Error('fail');
-      }
-    }).catch(function() {
-      status.className = 'form-status error';
-      status.textContent = 'Qualcosa è andato storto. Riprova o contattaci direttamente.';
-      btn.disabled = false;
-      btn.textContent = 'Invia Conferma';
-    });
-  });
 
 })();
 
