@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luca &amp; Kaia — 5 Luglio 2026</title>
+  <meta name="description" content="Matrimonio di Luca Marchetti &amp; Kaia — Domenica 5 Luglio 2026 · Abbazia di Sant'Elena, Serra San Quirico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    :root {
+      --gold: #c9a96e;
+      --gold-dark: #b8963e;
+      --gold-light: #e8c96d;
+      --red: #b22222;
+      --cream: #fdfaf5;
+      --bg: #f5f0eb;
+      --card: #ffffff;
+      --text: #3a322a;
+      --text-muted: #8a7e74;
+      --border: #e8e0d8;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(44,36,32,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 0 30px;
+      display: flex; align-items: center; height: 56px;
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--gold); letter-spacing: 1px;
+      margin-right: auto; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 6px; }
+    .nav-links a {
+      color: #d4c5b0; text-decoration: none;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.5px; padding: 6px 12px;
+      border-radius: 20px; transition: all 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); background: rgba(201,169,110,0.15); }
+    .nav-toggle {
+      display: none; background: none; border: none;
+      color: var(--gold); font-size: 22px; cursor: pointer;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(201,169,110,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 30%, rgba(178,34,34,0.08) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 80%, rgba(201,169,110,0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #1a1410 0%, #2c2218 20%, #3d3020 40%, #4a3c28 55%, #3d3020 70%, #2c2218 85%, #1a1410 100%);
+      padding: 100px 20px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(1px 1px at 10% 20%, rgba(232,201,109,0.6), transparent),
+        radial-gradient(1px 1px at 25% 55%, rgba(232,201,109,0.4), transparent),
+        radial-gradient(1px 1px at 40% 15%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 55% 70%, rgba(232,201,109,0.5), transparent),
+        radial-gradient(1px 1px at 70% 35%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 85% 60%, rgba(232,201,109,0.6), transparent),
+        radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.3), transparent),
+        radial-gradient(1px 1px at 90% 15%, rgba(232,201,109,0.5), transparent),
+        radial-gradient(1.5px 1.5px at 50% 40%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 65% 85%, rgba(232,201,109,0.4), transparent);
+      animation: twinkle 4s ease-in-out infinite alternate;
+      pointer-events: none; z-index: 0;
+    }
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.6; }
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(transparent, var(--bg));
+      z-index: 1;
+    }
+    .hero > * { position: relative; z-index: 2; }
+    .hero-chinese {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 16px; color: rgba(232,201,109,0.7);
+      letter-spacing: 8px; margin-bottom: 16px;
+    }
+    .hero-pre {
+      font-weight: 300; font-size: 12px;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 24px;
+    }
+    .hero-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(48px, 10vw, 80px);
+      font-weight: 400; line-height: 1.2;
+      background: linear-gradient(135deg, #d4af37, #c9a96e, #e8c96d, #b8963e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    .hero-amp {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 300;
+      font-size: clamp(28px, 5vw, 40px);
+      display: block; margin: 4px 0;
+      -webkit-text-fill-color: unset;
+      color: var(--gold-light);
+      text-shadow: 0 0 12px rgba(232,201,109,0.3);
+    }
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 400;
+      color: #e8ddd0; letter-spacing: 3px; margin-top: 16px;
+    }
+    .hero-venue {
+      font-size: 13px; font-weight: 400;
+      color: var(--text-muted); margin-top: 8px; letter-spacing: 1px;
+    }
+    .countdown {
+      display: flex; gap: 24px; margin-top: 32px;
+      position: relative; z-index: 1;
+    }
+    .hero-rsvp-cta {
+      display: inline-block; margin-top: 28px;
+      padding: 14px 28px;
+      font-size: 13px; font-weight: 600;
+      color: #fff; text-decoration: none;
+      border: 2px solid rgba(232,201,109,0.5); border-radius: 8px;
+      background: rgba(178,34,34,0.3);
+      letter-spacing: 0.5px; position: relative; z-index: 2;
+      transition: all 0.3s;
+    }
+    .hero-rsvp-cta:hover {
+      background: var(--red); color: white; border-color: var(--red);
+    }
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 600; color: var(--gold-light);
+    }
+    .cd-label {
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(232,201,109,0.5);
+    }
+
+    /* ── SHARED ── */
+    .divider-ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin: 0 auto;
+    }
+    .divider-ornament .line { width: 40px; height: 1px; background: var(--gold); }
+    .divider-ornament .dot { width: 5px; height: 5px; background: var(--red); transform: rotate(45deg); }
+
+    section {
+      max-width: 900px; margin: 0 auto; padding: 70px 24px;
+    }
+    .section-icon { font-size: 32px; margin-bottom: 12px; display: block; text-align: center; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 600;
+      color: #4a3f35; text-align: center; margin-bottom: 6px;
+    }
+    .section-sub {
+      text-align: center; font-size: 12px;
+      color: var(--text-muted); letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 40px;
+    }
+    .card {
+      background: var(--card); border-radius: 12px;
+      border: 1px solid var(--border); padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      margin-bottom: 24px;
+    }
+
+    /* ── INVITATION SCAN GALLERY ── */
+    .scan-gallery {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 40px; margin-bottom: 40px;
+    }
+    .scan-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      max-width: 640px;
+      width: 100%;
+    }
+    .scan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+    .scan-card img {
+      width: 100%;
+      display: block;
+    }
+    .scan-card .scan-label {
+      padding: 12px 16px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold-dark); text-align: center;
+    }
+
+    /* ── DETAILS ── */
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .detail-card { text-align: center; padding: 32px 24px; }
+    .detail-card .detail-icon { font-size: 36px; margin-bottom: 14px; }
+    .detail-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 600; color: #4a3f35; margin-bottom: 4px;
+    }
+    .detail-card .detail-time {
+      font-size: 18px; font-weight: 600; color: var(--gold-dark); margin-bottom: 8px;
+    }
+    .detail-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+    .detail-card .map-link {
+      display: inline-block; margin-top: 12px;
+      font-size: 12px; font-weight: 600;
+      color: var(--gold-dark); text-decoration: none;
+      border-bottom: 1px solid var(--gold); transition: color 0.3s;
+    }
+    .detail-card .map-link:hover { color: var(--red); }
+
+    /* ── MENU ── */
+    .menu-card { text-align: center; }
+    .menu-header {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: 38px;
+      background: linear-gradient(135deg, #d4af37, #c9a96e, #e8c96d, #b8963e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .menu-course-title {
+      font-weight: 500; font-size: 10px;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--red); margin-top: 24px; margin-bottom: 8px;
+    }
+    .menu-items {
+      list-style: none; padding: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; color: #555; line-height: 1.9;
+    }
+    .menu-items li::before { content: '◆ '; color: var(--red); font-size: 8px; vertical-align: middle; }
+    .menu-divider { width: 60px; height: 1px; background: var(--gold); margin: 24px auto; }
+
+    /* ── SCHEDULE ── */
+    .tl-wrap {
+      position: relative; padding-left: 28px;
+    }
+    .tl-wrap::before {
+      content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--border) 0%, var(--gold) 10%, var(--gold) 90%, var(--border) 100%);
+    }
+    .tl-item {
+      position: relative; padding: 16px 0;
+      border-bottom: 1px solid #f3ede6;
+    }
+    .tl-item:last-child { border-bottom: none; }
+    .tl-dot {
+      position: absolute; left: -22px; top: 20px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--gold); border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--gold); z-index: 1;
+    }
+    .tl-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--gold-dark); margin-bottom: 2px;
+    }
+    .tl-event strong { font-size: 21px; color: #3a3a3a; }
+    .tl-event p { font-size: 18px; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── TRAVEL ── */
+    .travel-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .travel-card { padding: 28px 24px; }
+    .travel-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 600; color: #4a3f35; margin-bottom: 12px;
+    }
+    .travel-card ul { list-style: none; padding: 0; }
+    .travel-card li {
+      font-size: 20px; color: var(--text-muted);
+      padding: 6px 0; border-bottom: 1px solid #f0ece6; line-height: 1.6;
+    }
+    .travel-card li:last-child { border-bottom: none; }
+    .travel-card li::before { content: '→ '; color: var(--gold); font-weight: 600; }
+
+    /* ── GIFT ── */
+    .gift-section {
+      background: linear-gradient(135deg, #fffdf9, #fff8f0);
+      border: 2px solid var(--gold);
+    }
+    .gift-section .gift-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px; font-style: italic;
+      color: #555; text-align: center; line-height: 1.8;
+      max-width: 580px; margin: 0 auto 24px;
+    }
+    .iban-box {
+      background: rgba(201,169,110,0.08);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 20px;
+      text-align: center; margin: 0 auto;
+      max-width: 450px;
+    }
+    .iban-box .iban-label {
+      font-size: 15px; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold-dark); margin-bottom: 6px;
+    }
+    .iban-code {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px; font-weight: 700;
+      color: var(--text); letter-spacing: 1px;
+      word-break: break-all;
+    }
+    .iban-name {
+      font-size: 20px; color: var(--text-muted); margin-top: 4px;
+    }
+    .iban-note {
+      font-size: 18px; color: var(--text-muted);
+      margin-top: 12px; font-style: italic;
+    }
+    .btn-copy {
+      display: inline-block; margin-top: 12px;
+      padding: 8px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--card); background: var(--gold-dark);
+      border: none; border-radius: 6px; cursor: pointer;
+      transition: background 0.3s;
+    }
+    .btn-copy:hover { background: var(--gold); }
+
+    /* ── RSVP ── */
+    .rsvp-section {
+      background: linear-gradient(135deg, #2c2420, #3d342c);
+      padding: 80px 24px;
+      border-top: 5px solid var(--red);
+      border-bottom: 5px solid var(--red);
+    }
+    .rsvp-section .section-title { color: var(--gold-light); }
+    .rsvp-section .section-sub { color: #a09888; }
+    .rsvp-banner {
+      background: var(--red); color: white;
+      text-align: center; padding: 18px 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 600;
+      letter-spacing: 1px; margin-bottom: 32px;
+      border-radius: 8px;
+      animation: rsvp-pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes rsvp-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(178,34,34,0.5); }
+      50% { box-shadow: 0 0 20px 6px rgba(178,34,34,0.3); }
+    }
+    .rsvp-form { max-width: 520px; margin: 0 auto; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 11px; font-weight: 600;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 14px 16px;
+      font-family: 'Montserrat', sans-serif; font-size: 14px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 8px; color: #e8e0d8;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--gold); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #6b5f55; }
+    .form-group select { cursor: pointer; }
+    .form-group select option { background: #3d342c; color: #e8e0d8; }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .radio-option {
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; font-size: 14px; color: #d4c5b0;
+    }
+    .radio-option input[type="radio"] {
+      width: 18px; height: 18px;
+      appearance: none; -webkit-appearance: none;
+      border: 2px solid var(--gold); border-radius: 50%;
+      position: relative; cursor: pointer;
+    }
+    .radio-option input[type="radio"]:checked::after {
+      content: ''; position: absolute;
+      top: 3px; left: 3px; width: 8px; height: 8px;
+      background: var(--gold); border-radius: 50%;
+    }
+    .btn-rsvp {
+      display: block; width: 100%; padding: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: #2c2420;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s; margin-top: 8px;
+    }
+    .btn-rsvp:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(201,169,110,0.4); }
+    .btn-rsvp:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .form-status { text-align: center; margin-top: 20px; font-size: 14px; min-height: 24px; }
+    .form-status.success { color: #81c784; }
+    .form-status.error { color: #ef9a9a; }
+
+    /* ── FAQ ── */
+    .faq-item { margin-bottom: 20px; }
+    .faq-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 600; color: #4a3f35; margin-bottom: 6px;
+    }
+    .faq-a { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── CONTACT BAR ── */
+    .contact-bar {
+      text-align: center; padding: 8px 0; margin-top: 16px;
+      font-size: 13px; color: var(--text-muted);
+    }
+    .contact-bar a {
+      color: var(--gold-dark); text-decoration: none;
+      font-weight: 600; border-bottom: 1px solid rgba(201,169,110,0.4);
+    }
+    .contact-bar a:hover { color: var(--red); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 40px 20px 60px; background: var(--bg);
+    }
+    footer .names {
+      font-family: 'Great Vibes', cursive; font-size: 36px;
+      background: linear-gradient(135deg, #d4af37, #c9a96e);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    footer .xi { font-family: 'Noto Serif SC', serif; font-size: 48px; color: rgba(178,34,34,0.15); margin-bottom: 8px; }
+    footer p { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
+
+    /* ── FADE-IN ── */
+    .fade-in {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: rgba(44,36,32,0.96); padding: 16px; gap: 4px; }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: block; }
+      .nav-links a { padding: 10px 16px; font-size: 13px; }
+      .details-grid, .travel-cards { grid-template-columns: 1fr; }
+      .countdown { gap: 16px; }
+      .cd-num { font-size: 28px; }
+      section { padding: 50px 18px; }
+      .scan-card { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════  NAVIGATION  ═══════════ -->
+<nav class="nav">
+  <a href="#" class="nav-brand">L &amp; K · 2026</a>
+  <button class="nav-toggle" aria-label="Menu">☰</button>
+  <div class="nav-links">
+    <a href="#invitation">Invito</a>
+    <a href="#gift">Regalo</a>
+    <a href="#schedule">Programma</a>
+    <a href="#travel">Info Utili</a>
+    <a href="#rsvp">RSVP</a>
+    <a href="#faq">Q&amp;A</a>
+  </div>
+</nav>
+
+<!-- ═══════════  HERO  ═══════════ -->
+<header class="hero" id="home">
+  <p class="hero-chinese">我们诚挚地邀请您参加我们的婚礼</p>
+  <p class="hero-pre" style="color:rgba(232,201,109,0.8);font-size:14px;font-weight:600;">Si Sposano</p>
+  <h1 class="hero-names">
+    Luca Marchetti
+    <span class="hero-amp">&amp;</span>
+    Kaia
+  </h1>
+  <p class="hero-date">Domenica, 5 Luglio 2026</p>
+  <div class="divider-ornament" style="margin-top:28px;">
+    <span class="line" style="background:rgba(232,201,109,0.4);"></span>
+    <span class="dot" style="background:var(--gold-light);"></span>
+    <span class="line" style="background:rgba(232,201,109,0.4);"></span>
+  </div>
+  <div class="countdown" id="countdown">
+    <div class="cd-box"><div class="cd-num" id="cd-days">—</div><div class="cd-label">Giorni</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">—</div><div class="cd-label">Ore</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">—</div><div class="cd-label">Minuti</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">—</div><div class="cd-label">Secondi</div></div>
+  </div>
+  <a href="#rsvp" class="hero-rsvp-cta">Vi preghiamo di confermare la vostra presenza nel modulo in fondo a questa pagina ↓</a>
+</header>
+
+<!-- ═══════════  SCANNED INVITATION  ═══════════ -->
+<section id="invitation" class="fade-in">
+  <span class="section-icon">💌</span>
+  <h2 class="section-title">Il Nostro Invito</h2>
+  <div class="section-sub">L'invito cartaceo originale</div>
+
+  <div class="scan-gallery">
+    <div class="scan-card">
+      <img src="first_page_invitation.png" alt="Invito — Cerimonia" loading="lazy">
+      <div class="scan-label">La Cerimonia</div>
+    </div>
+    <div class="scan-card">
+      <img src="second_page_invitation.png" alt="Invito — Menu" loading="lazy">
+      <div class="scan-label">Il Menu</div>
+    </div>
+    <div class="scan-card">
+      <img src="third_page_invitation.png" alt="Invito — Timeline" loading="lazy">
+      <div class="scan-label">Il Programma</div>
+    </div>
+  </div>
+
+  <!-- Page 4 info written in HTML instead of image -->
+  <div class="card gift-section" style="max-width:640px;margin:0 auto;">
+    <p style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px;">📍 LOCATION</p>
+    <p style="text-align:center;font-size:21px;color:var(--text);line-height:1.8;margin-bottom:12px;">
+      <strong>Abbazia di Sant'Elena</strong><br>
+      Località Sant'Elena, 40<br>
+      60048 Serra San Quirico (AN)
+    </p>
+    <p style="text-align:center;margin-bottom:20px;">
+      <a href="https://maps.google.com/?q=Abbazia+di+Sant'Elena+Serra+San+Quirico" target="_blank" rel="noopener" style="color:var(--gold-dark);font-size:20px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold);">Apri su Google Maps →</a>
+    </p>
+
+    <div style="width:60px;height:1px;background:var(--gold);margin:20px auto;"></div>
+
+    <p style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px;">📞 CONTATTI</p>
+    <p style="text-align:center;font-size:21px;color:var(--text);line-height:2;">
+      📞 <a href="tel:+474793439037" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+47 4793439037</a> (Luca)<br>
+      📞 <a href="tel:+393495604448" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+39 3495604448</a> (Elena, madre dello sposo)
+    </p>
+
+    <div style="width:60px;height:1px;background:var(--gold);margin:20px auto;"></div>
+
+    <p style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:8px;letter-spacing:1px;">⏰ RSVP</p>
+    <p style="text-align:center;font-size:21px;color:var(--text);">Si prega di confermare entro il <strong>15 Maggio 2026</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════  GIFT / IBAN  ═══════════ -->
+<section id="gift" class="fade-in">
+  <span class="section-icon">🎁</span>
+  <h2 class="section-title">Regalo</h2>
+  <div class="section-sub">Un pensiero dal cuore</div>
+
+  <div class="card gift-section">
+    <p class="gift-text">
+      La vostra presenza al nostro matrimonio è già il dono più prezioso.<br>
+      Non abbiamo una lista nozze tradizionale.<br><br>
+      Se vi fa piacere farci un regalo, un pensiero sul nostro IBAN
+      sarà davvero gradito e ci aiuterà a iniziare la nostra vita insieme.
+    </p>
+
+    <div class="iban-box">
+      <div class="iban-label">IBAN</div>
+      <div class="iban-code" id="iban-code">IT54B0854937470000000001028</div>
+      <div class="iban-name">Intestato a <strong>Luca Marchetti</strong></div>
+      <div class="iban-note">
+        Nella causale vi chiediamo gentilmente di scrivere il vostro nome,<br>
+        in modo da poter ringraziare ognuno di voi con affetto.
+      </div>
+      <button class="btn-copy" onclick="copyIBAN()">📋 Copia IBAN</button>
+    </div>
+
+    <p style="text-align:center;margin-top:20px;font-family:'Noto Serif SC',serif;font-size:24px;color:rgba(178,34,34,0.4);">
+      感谢你们的心意！
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════  SCHEDULE / TIMELINE  ═══════════ -->
+<section id="schedule" class="fade-in">
+  <span class="section-icon">🕐</span>
+  <h2 class="section-title">Programma</h2>
+  <div class="section-sub">Wedding Timeline · 05.07.2026</div>
+
+  <div class="card">
+    <div class="tl-wrap">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--red);box-shadow:0 0 0 2px var(--red);"></div>
+        <div class="tl-time">17:00</div>
+        <div class="tl-event"><strong>⛪ Cerimonia Nuziale</strong><p>Cerimonia nella chiesa dell'Abbazia. Vi preghiamo di prendere posto entro le 16:45.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">17:45</div>
+        <div class="tl-event"><strong>🎉 Confetti &amp; Foto di gruppo</strong><p>Lancio del riso e foto ricordo all'ingresso della chiesa.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">18:15</div>
+        <div class="tl-event"><strong>🥂 Aperitivo di Benvenuto &amp; Buffet</strong><p>Aperitivo e gran buffet di antipasti misti nei giardini, mentre gli sposi scattano le foto.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#27ae60;box-shadow:0 0 0 2px #27ae60;"></div>
+        <div class="tl-time">19:30</div>
+        <div class="tl-event"><strong>🎊 Ingresso degli Sposi</strong><p>Arrivo degli sposi! Brindisi di benvenuto.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">19:45</div>
+        <div class="tl-event"><strong>🍽️ Cena Nuziale</strong><p>Cena con primi, secondi e intrattenimento tra le portate.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:var(--gold-dark);box-shadow:0 0 0 2px var(--gold-dark);"></div>
+        <div class="tl-time">21:30</div>
+        <div class="tl-event"><strong>🎂 Taglio della Torta</strong><p>Taglio della torta nuziale e brindisi.</p></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#8e44ad;box-shadow:0 0 0 2px #8e44ad;"></div>
+        <div class="tl-time">22:00</div>
+        <div class="tl-event"><strong>💃 Musica e Danze</strong><p>Primo ballo e poi tutti in pista! Musica e balli fino a tarda notte.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════  TRAVEL  ═══════════ -->
+<section id="travel" class="fade-in">
+  <span class="section-icon">ℹ️</span>
+  <h2 class="section-title">Info Utili</h2>
+  <div class="section-sub">Alloggio &amp; Trasporto</div>
+
+  <div class="travel-cards">
+    <div class="card travel-card">
+      <h3>🏨 Dove dormire</h3>
+      <p style="font-size:21px;color:var(--text);line-height:1.8;">Vi possiamo assistere noi con la ricerca dell'alloggio.</p>
+      <p style="font-size:20px;color:var(--gold-dark);font-style:italic;margin-top:8px;">🔄 In aggiornamento...</p>
+    </div>
+    <div class="card travel-card">
+      <h3>🚌 Trasporto al venue</h3>
+      <p style="font-size:21px;color:var(--text);line-height:1.8;">Possibilità di navetta per raggiungere l'Abbazia di Sant'Elena.</p>
+      <p style="font-size:20px;color:var(--gold-dark);font-style:italic;margin-top:8px;">🔄 Ci stiamo lavorando...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════  RSVP  ═══════════ -->
+<section id="rsvp" class="rsvp-section fade-in" style="max-width:none;padding:80px 24px;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div class="rsvp-banner">⚠️ IMPORTANTE — Conferma la tua presenza entro il 15 Maggio 2026 ⚠️</div>
+    <span class="section-icon">💌</span>
+    <h2 class="section-title">Conferma Presenza · RSVP</h2>
+    <div class="section-sub">Compila il modulo qui sotto — è fondamentale per l'organizzazione!</div>
+
+    <form class="rsvp-form" id="rsvp-form">
+      <div class="form-group">
+        <label for="name">Nome e Cognome</label>
+        <input type="text" id="name" name="name" placeholder="Il tuo nome completo" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="la-tua@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Sarai presente?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="attending" value="Sì, con gioia!" required>
+            <span>Sì, con gioia!</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="attending" value="Purtroppo no">
+            <span>Purtroppo no</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group" id="guest-count-group">
+        <label for="guests">Numero di ospiti (te compreso/a)</label>
+        <select id="guests" name="guests">
+          <option value="1">1</option>
+          <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="guest-names-group">
+        <label for="guest_names">Nomi degli accompagnatori</label>
+        <input type="text" id="guest_names" name="guest_names" placeholder="es. Maria Rossi, Paolo Rossi">
+      </div>
+
+      <div class="form-group" id="dietary-group">
+        <label for="dietary">Allergie o esigenze alimentari</label>
+        <textarea id="dietary" name="dietary" placeholder="Vegetariano, vegano, senza glutine, allergie..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Hai bisogno della navetta da Numana?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="shuttle" value="Sì, grazie!" required>
+            <span>Sì, grazie!</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="shuttle" value="No, arrivo da solo/a">
+            <span>No, arrivo da solo/a</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Messaggio per gli sposi (opzionale)</label>
+        <textarea id="message" name="message" placeholder="Un pensiero, una richiesta musicale, o semplicemente un saluto..."></textarea>
+      </div>
+
+      <button type="submit" class="btn-rsvp" id="btn-submit">Invia Conferma</button>
+      <div class="form-status" id="form-status"></div>
+    </form>
+
+    <div class="contact-bar" style="margin-top:24px;">
+      <p style="color:#a09888;">Per ulteriori informazioni:</p>
+      <p style="margin-top:6px;">
+        📞 <a href="tel:+474793439037">+47 4793439037</a> (Luca)
+        &nbsp;·&nbsp;
+        📞 <a href="tel:+393495604448">+39 3495604448</a> (Elena, madre dello sposo)
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════  FAQ  ═══════════ -->
+<section id="faq" class="fade-in">
+  <span class="section-icon">❓</span>
+  <h2 class="section-title">Domande &amp; Risposte</h2>
+  <div class="section-sub">Tutto quello che devi sapere</div>
+
+  <div class="card">
+    <div class="faq-item">
+      <div class="faq-q">Qual è il dress code?</div>
+      <div class="faq-a">Semi-formale / Elegante. Luglio nelle Marche è caldo (30°C+), quindi tessuti leggeri vanno benissimo. Evitate i tacchi a spillo per i giardini.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Posso portare un accompagnatore?</div>
+      <div class="faq-a">Vi preghiamo di limitare il numero di persone a quanto indicato nell'invito. In caso di dubbio, contattateci!</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Dove dovrei alloggiare?</div>
+      <div class="faq-a">Consigliamo di soggiornare a <strong>Numana</strong> — una bella cittadina sul mare. La navetta per il venue parte da lì. Prenotate presto, luglio è alta stagione!</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">C'è parcheggio al venue?</div>
+      <div class="faq-a">Il parcheggio all'Abbazia è limitato. Vi consigliamo vivamente di usare la navetta da Numana.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">La cerimonia sarà in italiano?</div>
+      <div class="faq-a">La cerimonia sarà in italiano con i momenti chiave spiegati in inglese e cinese. Verrà fornito un programma bilingue.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Com'è il clima?</div>
+      <div class="faq-a">Inizio luglio nelle Marche è soleggiato e caldo (28–32°C). Portate crema solare, occhiali da sole e bevete molto! I giardini dell'Abbazia hanno zone ombreggiate.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Come arrivo a Serra San Quirico?</div>
+      <div class="faq-a">Non preoccupatevi! Metteremo a disposizione una navetta da Numana (~2h di viaggio panoramico tra le colline marchigiane). Presentatevi al punto di raccolta entro le 14:45 il giorno delle nozze.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════  FOOTER  ═══════════ -->
+<footer>
+  <div class="xi">囍</div>
+  <div class="names">Luca &amp; Kaia</div>
+  <p>5 Luglio 2026 · Abbazia di Sant'Elena</p>
+  <p style="margin-top:8px;font-size:13px;color:var(--text-muted);">Non vediamo l'ora di festeggiare insieme a voi!</p>
+  <p style="margin-top:16px;font-size:11px;color:#bbb;">Made with ♥</p>
+</footer>
+
+<!-- ═══════════  SCRIPTS  ═══════════ -->
+<script>
+(function() {
+  "use strict";
+
+  /* ── Mobile menu toggle ── */
+  var toggle = document.querySelector('.nav-toggle');
+  var links  = document.querySelector('.nav-links');
+  toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() { links.classList.remove('open'); });
+  });
+
+  /* ── Countdown ── */
+  var weddingDate = new Date('2026-07-05T17:00:00+02:00');
+  function updateCountdown() {
+    var now = new Date();
+    var diff = weddingDate - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent  = '🎉';
+      document.getElementById('cd-hours').textContent = '🥂';
+      document.getElementById('cd-mins').textContent  = '💕';
+      document.getElementById('cd-secs').textContent  = '🎊';
+      return;
+    }
+    document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000);
+    document.getElementById('cd-hours').textContent = Math.floor((diff % 86400000) / 3600000);
+    document.getElementById('cd-mins').textContent  = Math.floor((diff % 3600000) / 60000);
+    document.getElementById('cd-secs').textContent  = Math.floor((diff % 60000) / 1000);
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── Fade-in on scroll ── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+
+
+  /* ── Show/hide conditional RSVP fields ── */
+  var attendRadios = document.querySelectorAll('input[name="attending"]');
+  var conditionalGroups = ['guest-count-group', 'guest-names-group', 'dietary-group'];
+  attendRadios.forEach(function(r) {
+    r.addEventListener('change', function() {
+      var show = this.value.indexOf('gioia') >= 0;
+      conditionalGroups.forEach(function(id) {
+        document.getElementById(id).style.display = show ? 'block' : 'none';
+      });
+    });
+  });
+
+  /* ── RSVP → Google Forms + Email backup ──
+   *
+   * 1. Create a Google Form with matching fields
+   * 2. Replace GOOGLE_FORM_ACTION_URL with your form action URL
+   * 3. Replace entry.XXXXXXX with your actual entry IDs
+   * 4. Set up EmailJS (see instructions below)
+   * See SETUP_GUIDE.md for step-by-step instructions.
+   */
+  var GOOGLE_FORM_ACTION_URL = 'YOUR_GOOGLE_FORM_URL_HERE';
+
+  /* ── EmailJS config (backup email to lukhouse@hotmail.it) ──
+   *
+   * HOW TO SET UP EmailJS (free, 200 emails/month):
+   * 1. Go to https://www.emailjs.com/ and sign up
+   * 2. Add an "Email Service" → choose Outlook/Hotmail → connect lukhouse@hotmail.it
+   * 3. Note the Service ID (e.g. "service_abc123")
+   * 4. Create an "Email Template" with these variables:
+   *    Subject: "RSVP Matrimonio: {{name}}"
+   *    Body:
+   *      Nome: {{name}}
+   *      Email: {{email}}
+   *      Presente: {{attending}}
+   *      Ospiti: {{guests}}
+   *      Accompagnatori: {{guest_names}}
+   *      Allergie: {{dietary}}
+   *      Navetta: {{shuttle}}
+   *      Messaggio: {{message}}
+   * 5. Note the Template ID (e.g. "template_xyz789")
+   * 6. Go to Account → copy your Public Key
+   * 7. Replace the three values below:
+   */
+  var EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';
+  var EMAILJS_SERVICE_ID  = 'YOUR_EMAILJS_SERVICE_ID';
+  var EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
+
+  var FIELD_MAP = {
+    name:        'entry.XXXXXXXXXX',
+    email:       'entry.XXXXXXXXXX',
+    attending:   'entry.XXXXXXXXXX',
+    guests:      'entry.XXXXXXXXXX',
+    guest_names: 'entry.XXXXXXXXXX',
+    dietary:     'entry.XXXXXXXXXX',
+    shuttle:     'entry.XXXXXXXXXX',
+    message:     'entry.XXXXXXXXXX'
+  };
+
+  document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (GOOGLE_FORM_ACTION_URL === 'YOUR_GOOGLE_FORM_URL_HERE') {
+      document.getElementById('form-status').className = 'form-status error';
+      document.getElementById('form-status').textContent = 'Modulo RSVP non ancora configurato — vedi SETUP_GUIDE.md';
+      return;
+    }
+
+    var btn = document.getElementById('btn-submit');
+    var status = document.getElementById('form-status');
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso...';
+    status.className = 'form-status';
+    status.textContent = '';
+
+    /* ── Collect form values ── */
+    var nameVal = document.getElementById('name').value;
+    var emailVal = document.getElementById('email').value;
+    var attendVal = document.querySelector('input[name="attending"]:checked');
+    var attendStr = attendVal ? attendVal.value : '';
+    var guestsVal = document.getElementById('guests').value;
+    var guestNamesVal = document.getElementById('guest_names').value;
+    var dietaryVal = document.getElementById('dietary').value;
+    var shuttleVal = document.querySelector('input[name="shuttle"]:checked');
+    var shuttleStr = shuttleVal ? shuttleVal.value : '';
+    var messageVal = document.getElementById('message').value;
+
+    /* ── Send backup email via EmailJS ── */
+    if (EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name: nameVal,
+        email: emailVal,
+        attending: attendStr,
+        guests: guestsVal,
+        guest_names: guestNamesVal,
+        dietary: dietaryVal,
+        shuttle: shuttleStr,
+        message: messageVal
+      });
+    }
+
+    /* ── Send to Google Forms ── */
+    var formData = new FormData();
+    formData.append(FIELD_MAP.name, nameVal);
+    formData.append(FIELD_MAP.email, emailVal);
+    formData.append(FIELD_MAP.attending, attendStr);
+    formData.append(FIELD_MAP.guests, guestsVal);
+    formData.append(FIELD_MAP.guest_names, guestNamesVal);
+    formData.append(FIELD_MAP.dietary, dietaryVal);
+    formData.append(FIELD_MAP.shuttle, shuttleStr);
+    formData.append(FIELD_MAP.message, messageVal);
+
+    fetch(GOOGLE_FORM_ACTION_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: formData
+    }).then(function() {
+      status.className = 'form-status success';
+      status.textContent = '🎉 Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te!';
+      btn.textContent = '✓ Inviato!';
+      document.getElementById('rsvp-form').reset();
+      setTimeout(function() { btn.disabled = false; btn.textContent = 'Invia Conferma'; }, 5000);
+    }).catch(function() {
+      status.className = 'form-status error';
+      status.textContent = 'Qualcosa è andato storto. Riprova o contattaci direttamente.';
+      btn.disabled = false;
+      btn.textContent = 'Invia Conferma';
+    });
+  });
+
+})();
+
+/* ── Copy IBAN ── */
+function copyIBAN() {
+  var iban = document.getElementById('iban-code').textContent;
+  navigator.clipboard.writeText(iban).then(function() {
+    var btn = document.querySelector('.btn-copy');
+    btn.textContent = '✓ Copiato!';
+    setTimeout(function() { btn.textContent = '📋 Copia IBAN'; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
