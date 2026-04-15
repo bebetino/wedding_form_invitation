@@ -7,7 +7,6 @@
   <meta name="description" content="Matrimonio di Luca Marchetti &amp; Kaia — Domenica 5 Luglio 2026 · Abbazia di Sant'Elena, Serra San Quirico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     :root {
       --gold: #c9a96e;
@@ -732,6 +731,18 @@
         <textarea id="dietary" name="dietary" placeholder="Vegetariano, vegano, senza glutine, allergie..."></textarea>
       </div>
 
+      <div class="form-group" id="hotel-group">
+        <label for="hotel_rooms">Avete bisogno di una camera d'albergo?</label>
+        <select id="hotel_rooms" name="hotel_rooms">
+          <option value="No">No, grazie</option>
+          <option value="1">Sì, 1 camera</option>
+          <option value="2">Sì, 2 camere</option>
+          <option value="3">Sì, 3 camere</option>
+          <option value="4">Sì, 4 camere</option>
+          <option value="5">Sì, 5 camere</option>
+        </select>
+      </div>
+
       <div class="form-group">
         <label for="message">Messaggio per gli sposi (opzionale)</label>
         <textarea id="message" name="message" placeholder="Un pensiero, una richiesta musicale, o semplicemente un saluto..."></textarea>
@@ -832,7 +843,7 @@
 
   /* ── Show/hide conditional RSVP fields ── */
   var attendRadios = document.querySelectorAll('input[name="attending"]');
-  var conditionalGroups = ['guest-count-group', 'guest-names-group', 'dietary-group'];
+  var conditionalGroups = ['guest-count-group', 'guest-names-group', 'dietary-group', 'hotel-group'];
   attendRadios.forEach(function(r) {
     r.addEventListener('change', function() {
       var show = this.value.indexOf('gioia') >= 0;
@@ -842,24 +853,26 @@
     });
   });
 
-  /* ── RSVP → Google Apps Script backend ──
-   *
-   * This sends form data to a Google Apps Script web app that:
-   *   1. Saves the response in a Google Sheet
-   *   2. Sends an email to lukhouse@hotmail.it
-   *
-   * Replace the URL below with your deployed Apps Script URL.
-   */
-  var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+  /* ── Sync hotel room dropdown with guest count ── */
+  document.getElementById('guests').addEventListener('change', function() {
+    var max = parseInt(this.value);
+    var hotelSelect = document.getElementById('hotel_rooms');
+    var currentVal = hotelSelect.value;
+    hotelSelect.innerHTML = '<option value="No">No, grazie</option>';
+    for (var i = 1; i <= max; i++) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = 'Sì, ' + i + (i === 1 ? ' camera' : ' camere');
+      hotelSelect.appendChild(opt);
+    }
+    if (currentVal !== 'No' && parseInt(currentVal) <= max) {
+      hotelSelect.value = currentVal;
+    }
+  });
 
+  /* ── RSVP → FormSubmit.co (email to lukhouse@hotmail.it) ── */
   document.getElementById('rsvp-form').addEventListener('submit', function(e) {
     e.preventDefault();
-
-    if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
-      document.getElementById('form-status').className = 'form-status error';
-      document.getElementById('form-status').textContent = 'Modulo RSVP non ancora configurato.';
-      return;
-    }
 
     var btn = document.getElementById('btn-submit');
     var status = document.getElementById('form-status');
@@ -877,20 +890,28 @@
       guests: document.getElementById('guests').value,
       guest_names: document.getElementById('guest_names').value,
       dietary: document.getElementById('dietary').value,
-      message: document.getElementById('message').value
+      hotel_rooms: document.getElementById('hotel_rooms').value,
+      message: document.getElementById('message').value,
+      _subject: 'RSVP Matrimonio: ' + document.getElementById('name').value,
+      _template: 'table'
     };
 
-    fetch(APPS_SCRIPT_URL, {
+    fetch('https://formsubmit.co/ajax/lukhouse@hotmail.it', {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
-    }).then(function() {
-      status.className = 'form-status success';
-      status.textContent = '\uD83C\uDF89 Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te!';
-      btn.textContent = '\u2713 Inviato!';
-      document.getElementById('rsvp-form').reset();
-      setTimeout(function() { btn.disabled = false; btn.textContent = 'Invia Conferma'; }, 5000);
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      if (data.success) {
+        status.className = 'form-status success';
+        status.textContent = '\uD83C\uDF89 Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te!';
+        btn.textContent = '\u2713 Inviato!';
+        document.getElementById('rsvp-form').reset();
+        setTimeout(function() { btn.disabled = false; btn.textContent = 'Invia Conferma'; }, 5000);
+      } else {
+        throw new Error('fail');
+      }
     }).catch(function() {
       status.className = 'form-status error';
       status.textContent = 'Qualcosa è andato storto. Riprova o contattaci direttamente.';
