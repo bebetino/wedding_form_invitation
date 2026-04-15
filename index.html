@@ -515,7 +515,7 @@
   <h1 class="hero-names">
     Luca Marchetti
     <span class="hero-amp">&amp;</span>
-    Kaia
+    Kaia Chen
   </h1>
   <p class="hero-date">Domenica, 5 Luglio 2026</p>
   <div class="divider-ornament" style="margin-top:28px;">
@@ -842,58 +842,22 @@
     });
   });
 
-  /* ── RSVP → Google Forms + Email backup ──
+  /* ── RSVP → Google Apps Script backend ──
    *
-   * 1. Create a Google Form with matching fields
-   * 2. Replace GOOGLE_FORM_ACTION_URL with your form action URL
-   * 3. Replace entry.XXXXXXX with your actual entry IDs
-   * 4. Set up EmailJS (see instructions below)
-   * See SETUP_GUIDE.md for step-by-step instructions.
-   */
-  var GOOGLE_FORM_ACTION_URL = 'YOUR_GOOGLE_FORM_URL_HERE';
-
-  /* ── EmailJS config (backup email to lukhouse@hotmail.it) ──
+   * This sends form data to a Google Apps Script web app that:
+   *   1. Saves the response in a Google Sheet
+   *   2. Sends an email to lukhouse@hotmail.it
    *
-   * HOW TO SET UP EmailJS (free, 200 emails/month):
-   * 1. Go to https://www.emailjs.com/ and sign up
-   * 2. Add an "Email Service" → choose Outlook/Hotmail → connect lukhouse@hotmail.it
-   * 3. Note the Service ID (e.g. "service_abc123")
-   * 4. Create an "Email Template" with these variables:
-   *    Subject: "RSVP Matrimonio: {{name}}"
-   *    Body:
-   *      Nome: {{name}}
-   *      Email: {{email}}
-   *      Presente: {{attending}}
-   *      Ospiti: {{guests}}
-   *      Accompagnatori: {{guest_names}}
-   *      Allergie: {{dietary}}
-   *      Navetta: {{shuttle}}
-   *      Messaggio: {{message}}
-   * 5. Note the Template ID (e.g. "template_xyz789")
-   * 6. Go to Account → copy your Public Key
-   * 7. Replace the three values below:
+   * Replace the URL below with your deployed Apps Script URL.
    */
-  var EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';
-  var EMAILJS_SERVICE_ID  = 'YOUR_EMAILJS_SERVICE_ID';
-  var EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
-
-  var FIELD_MAP = {
-    name:        'entry.XXXXXXXXXX',
-    email:       'entry.XXXXXXXXXX',
-    attending:   'entry.XXXXXXXXXX',
-    guests:      'entry.XXXXXXXXXX',
-    guest_names: 'entry.XXXXXXXXXX',
-    dietary:     'entry.XXXXXXXXXX',
-    shuttle:     'entry.XXXXXXXXXX',
-    message:     'entry.XXXXXXXXXX'
-  };
+  var APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
 
   document.getElementById('rsvp-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    if (GOOGLE_FORM_ACTION_URL === 'YOUR_GOOGLE_FORM_URL_HERE') {
+    if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
       document.getElementById('form-status').className = 'form-status error';
-      document.getElementById('form-status').textContent = 'Modulo RSVP non ancora configurato — vedi SETUP_GUIDE.md';
+      document.getElementById('form-status').textContent = 'Modulo RSVP non ancora configurato.';
       return;
     }
 
@@ -904,52 +868,27 @@
     status.className = 'form-status';
     status.textContent = '';
 
-    /* ── Collect form values ── */
-    var nameVal = document.getElementById('name').value;
-    var emailVal = document.getElementById('email').value;
     var attendVal = document.querySelector('input[name="attending"]:checked');
-    var attendStr = attendVal ? attendVal.value : '';
-    var guestsVal = document.getElementById('guests').value;
-    var guestNamesVal = document.getElementById('guest_names').value;
-    var dietaryVal = document.getElementById('dietary').value;
-    var shuttleVal = document.querySelector('input[name="shuttle"]:checked');
-    var shuttleStr = shuttleVal ? shuttleVal.value : '';
-    var messageVal = document.getElementById('message').value;
 
-    /* ── Send backup email via EmailJS ── */
-    if (EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
-      emailjs.init(EMAILJS_PUBLIC_KEY);
-      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        name: nameVal,
-        email: emailVal,
-        attending: attendStr,
-        guests: guestsVal,
-        guest_names: guestNamesVal,
-        dietary: dietaryVal,
-        shuttle: shuttleStr,
-        message: messageVal
-      });
-    }
+    var payload = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      attending: attendVal ? attendVal.value : '',
+      guests: document.getElementById('guests').value,
+      guest_names: document.getElementById('guest_names').value,
+      dietary: document.getElementById('dietary').value,
+      message: document.getElementById('message').value
+    };
 
-    /* ── Send to Google Forms ── */
-    var formData = new FormData();
-    formData.append(FIELD_MAP.name, nameVal);
-    formData.append(FIELD_MAP.email, emailVal);
-    formData.append(FIELD_MAP.attending, attendStr);
-    formData.append(FIELD_MAP.guests, guestsVal);
-    formData.append(FIELD_MAP.guest_names, guestNamesVal);
-    formData.append(FIELD_MAP.dietary, dietaryVal);
-    formData.append(FIELD_MAP.shuttle, shuttleStr);
-    formData.append(FIELD_MAP.message, messageVal);
-
-    fetch(GOOGLE_FORM_ACTION_URL, {
+    fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      body: formData
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     }).then(function() {
       status.className = 'form-status success';
-      status.textContent = '🎉 Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te!';
-      btn.textContent = '✓ Inviato!';
+      status.textContent = '\uD83C\uDF89 Grazie! La tua conferma è stata ricevuta. Non vediamo l\'ora di festeggiare con te!';
+      btn.textContent = '\u2713 Inviato!';
       document.getElementById('rsvp-form').reset();
       setTimeout(function() { btn.disabled = false; btn.textContent = 'Invia Conferma'; }, 5000);
     }).catch(function() {
