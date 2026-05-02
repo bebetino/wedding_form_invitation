@@ -53,6 +53,32 @@
       border-radius: 20px; transition: all 0.3s;
     }
     .nav-links a:hover { color: var(--gold-light); background: rgba(201,169,110,0.15); }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 14px;
+    }
+    .lang-select {
+      background: rgba(201,169,110,0.14);
+      color: #f2e6d8;
+      border: 1px solid rgba(201,169,110,0.45);
+      border-radius: 18px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+    }
+    .lang-select:focus {
+      outline: none;
+      border-color: var(--gold-light);
+      box-shadow: 0 0 0 2px rgba(201,169,110,0.18);
+    }
+    .lang-select option {
+      background: #2c2420;
+      color: #f2e6d8;
+    }
     .nav-toggle {
       display: none; background: none; border: none;
       color: var(--gold); font-size: 22px; cursor: pointer;
@@ -147,7 +173,7 @@
     .hero-rsvp-cta {
       display: inline-block; margin-top: 28px;
       padding: 14px 28px;
-      font-size: 13px; font-weight: 600;
+      font-size: 21px; font-weight: 400;
       color: #fff; text-decoration: none;
       border: 2px solid rgba(232,201,109,0.5); border-radius: 8px;
       background: rgba(178,34,34,0.3);
@@ -483,6 +509,8 @@
       .nav-links.open { display: flex; }
       .nav-toggle { display: block; }
       .nav-links a { padding: 10px 16px; font-size: 13px; }
+      .nav-actions { margin-left: 8px; }
+      .lang-select { font-size: 10px; padding: 5px 8px; }
       .details-grid, .travel-cards { grid-template-columns: 1fr; }
       .countdown { gap: 16px; }
       .cd-num { font-size: 28px; }
@@ -498,95 +526,102 @@
   <a href="#" class="nav-brand">L &amp; K · 2026</a>
   <button class="nav-toggle" aria-label="Menu">☰</button>
   <div class="nav-links">
-    <a href="#invitation">Invito</a>
-    <a href="#gift">Regalo</a>
-    <a href="#schedule">Programma</a>
-    <a href="#travel">Info Utili</a>
-    <a href="#rsvp">RSVP</a>
-    <a href="#faq">Q&amp;A</a>
+    <a href="#invitation" id="nav-invitation">Invito</a>
+    <a href="#gift" id="nav-gift">Regalo</a>
+    <a href="#schedule" id="nav-schedule">Programma</a>
+    <a href="#travel" id="nav-travel">Info Utili</a>
+    <a href="#rsvp" id="nav-rsvp">RSVP</a>
+    <a href="#faq" id="nav-faq">Q&amp;A</a>
+  </div>
+  <div class="nav-actions">
+    <select id="language-select" class="lang-select" aria-label="Language selector">
+      <option value="it">ITALIANO</option>
+      <option value="en">ENGLISH</option>
+      <option value="zh">CHINESE</option>
+    </select>
   </div>
 </nav>
 
 <!-- ═══════════  HERO  ═══════════ -->
 <header class="hero" id="home">
-  <p class="hero-chinese">我们诚挚地邀请您参加我们的婚礼</p>
-  <p class="hero-pre" style="color:rgba(232,201,109,0.8);font-size:14px;font-weight:600;">Si Sposano</p>
+  <p class="hero-chinese" id="hero-tagline">我们诚挚地邀请您参加我们的婚礼</p>
+  <p class="hero-pre" id="hero-pre" style="color:rgba(232,201,109,0.8);font-size:14px;font-weight:600;">Si Sposano</p>
   <h1 class="hero-names">
     Luca Marchetti
     <span class="hero-amp">&amp;</span>
     Kaia Chen
   </h1>
-  <p class="hero-date">Domenica, 5 Luglio 2026</p>
+  <p class="hero-date" id="hero-date">Domenica, 5 Luglio 2026</p>
   <div class="divider-ornament" style="margin-top:28px;">
     <span class="line" style="background:rgba(232,201,109,0.4);"></span>
     <span class="dot" style="background:var(--gold-light);"></span>
     <span class="line" style="background:rgba(232,201,109,0.4);"></span>
   </div>
   <div class="countdown" id="countdown">
-    <div class="cd-box"><div class="cd-num" id="cd-days">—</div><div class="cd-label">Giorni</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-hours">—</div><div class="cd-label">Ore</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-mins">—</div><div class="cd-label">Minuti</div></div>
-    <div class="cd-box"><div class="cd-num" id="cd-secs">—</div><div class="cd-label">Secondi</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-days">—</div><div class="cd-label" id="cd-label-days">Giorni</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">—</div><div class="cd-label" id="cd-label-hours">Ore</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">—</div><div class="cd-label" id="cd-label-mins">Minuti</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">—</div><div class="cd-label" id="cd-label-secs">Secondi</div></div>
   </div>
-  <a href="#rsvp" class="hero-rsvp-cta">Vi preghiamo di confermare la vostra presenza nel modulo in fondo a questa pagina ↓</a>
+  <a href="#rsvp" class="hero-rsvp-cta" id="hero-rsvp-cta">Push here to RSVP ↓</a>
 </header>
 
 <!-- ═══════════  SCANNED INVITATION  ═══════════ -->
 <section id="invitation" class="fade-in">
   <span class="section-icon">💌</span>
-  <h2 class="section-title">Il Nostro Invito</h2>
-  <div class="section-sub">L'invito cartaceo originale</div>
+  <h2 class="section-title" id="invitation-title">Il Nostro Invito</h2>
+  <div class="section-sub" id="invitation-sub">L'invito cartaceo originale</div>
 
   <div class="scan-gallery">
     <div class="scan-card">
-      <img src="first_page_invitation.png" alt="Invito — Cerimonia" loading="lazy">
-      <div class="scan-label">La Cerimonia</div>
+      <img id="inv-page-1" src="it_page_1.png" alt="Invito - Pagina 1" loading="lazy">
+      <div class="scan-label" id="inv-page-1-label">Cerimonia</div>
     </div>
     <div class="scan-card">
-      <img src="second_page_invitation.png" alt="Invito — Menu" loading="lazy">
-      <div class="scan-label">Il Menu</div>
+      <img id="inv-page-2" src="it_page_2.png" alt="Invito - Pagina 2" loading="lazy">
+      <div class="scan-label" id="inv-page-2-label">Menu</div>
     </div>
     <div class="scan-card">
-      <img src="third_page_invitation.png" alt="Invito — Timeline" loading="lazy">
-      <div class="scan-label">Il Programma</div>
+      <img id="inv-page-3" src="it_page_3.png" alt="Invito - Pagina 3" loading="lazy">
+      <div class="scan-label" id="inv-page-3-label">Programma</div>
     </div>
   </div>
 
   <!-- Page 4 info written in HTML instead of image -->
   <div class="card gift-section" style="max-width:640px;margin:0 auto;">
-    <p style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px;">📍 LOCATION</p>
+    <p id="inv-location-label" style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px;">📍 LOCATION</p>
     <p style="text-align:center;font-size:21px;color:var(--text);line-height:1.8;margin-bottom:12px;">
       <strong>Abbazia di Sant'Elena</strong><br>
       Località Sant'Elena, 40<br>
       60048 Serra San Quirico (AN)
     </p>
     <p style="text-align:center;margin-bottom:20px;">
-      <a href="https://maps.google.com/?q=Abbazia+di+Sant'Elena+Serra+San+Quirico" target="_blank" rel="noopener" style="color:var(--gold-dark);font-size:20px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold);">Apri su Google Maps →</a>
+      <a id="inv-map-link" href="https://maps.google.com/?q=Abbazia+di+Sant'Elena+Serra+San+Quirico" target="_blank" rel="noopener" style="color:var(--gold-dark);font-size:20px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold);">Apri su Google Maps →</a>
     </p>
 
     <div style="width:60px;height:1px;background:var(--gold);margin:20px auto;"></div>
 
-    <p style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px;">📞 CONTATTI</p>
-    <p style="text-align:center;font-size:21px;color:var(--text);line-height:2;">
+    <p id="inv-contacts-label" style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:16px;letter-spacing:1px;">📞 CONTATTI</p>
+    <p id="inv-contacts-text" style="text-align:center;font-size:21px;color:var(--text);line-height:2;">
       📞 <a href="tel:+474793439037" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+47 4793439037</a> (Luca — WhatsApp)<br>
       📞 <a href="tel:+393495604448" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+39 3495604448</a> (Elena, madre dello sposo)
     </p>
 
     <div style="width:60px;height:1px;background:var(--gold);margin:20px auto;"></div>
 
-    <p style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:8px;letter-spacing:1px;">⏰ RSVP</p>
-    <p style="text-align:center;font-size:21px;color:var(--text);">Si prega di confermare entro il <strong>15 Maggio 2026</strong></p>
+    <p id="inv-rsvp-label" style="text-align:center;font-size:20px;color:var(--text-muted);margin-bottom:8px;letter-spacing:1px;">⏰ RSVP</p>
+    <p id="inv-rsvp-text" style="text-align:center;font-size:21px;color:var(--text);">Si prega di confermare entro il <strong>25 Maggio 2026</strong></p>
   </div>
 </section>
 
 <!-- ═══════════  GIFT / IBAN  ═══════════ -->
 <section id="gift" class="fade-in">
   <span class="section-icon">🎁</span>
-  <h2 class="section-title">Regalo</h2>
-  <div class="section-sub">Un pensiero dal cuore</div>
+  <h2 class="section-title" id="gift-title">Regalo</h2>
+  <div class="section-sub" id="gift-sub">Un pensiero dal cuore</div>
 
   <div class="card gift-section">
-    <p class="gift-text">
+    <p class="gift-text" id="gift-text">
       La vostra presenza al nostro matrimonio è già il dono più prezioso.<br>
       Non abbiamo una lista nozze tradizionale.<br><br>
       Se vi fa piacere farci un regalo, un pensiero sul nostro IBAN
@@ -596,12 +631,12 @@
     <div class="iban-box">
       <div class="iban-label">IBAN</div>
       <div class="iban-code" id="iban-code">IT54B0854937470000000001028</div>
-      <div class="iban-name">Intestato a <strong>Luca Marchetti</strong></div>
-      <div class="iban-note">
+      <div class="iban-name" id="iban-name">Intestato a <strong>Luca Marchetti</strong></div>
+      <div class="iban-note" id="iban-note">
         Nella causale vi chiediamo gentilmente di scrivere il vostro nome,<br>
         in modo da poter ringraziare ognuno di voi con affetto.
       </div>
-      <button class="btn-copy" onclick="copyIBAN()">📋 Copia IBAN</button>
+      <button class="btn-copy" id="copy-iban-btn" onclick="copyIBAN()">📋 Copia IBAN</button>
     </div>
 
     <p style="text-align:center;margin-top:20px;font-family:'Noto Serif SC',serif;font-size:24px;color:rgba(178,34,34,0.4);">
@@ -613,45 +648,45 @@
 <!-- ═══════════  SCHEDULE / TIMELINE  ═══════════ -->
 <section id="schedule" class="fade-in">
   <span class="section-icon">🕐</span>
-  <h2 class="section-title">Programma</h2>
-  <div class="section-sub">Wedding Timeline · 05.07.2026</div>
+  <h2 class="section-title" id="schedule-title">Programma</h2>
+  <div class="section-sub" id="schedule-sub">Wedding Timeline · 05.07.2026</div>
 
   <div class="card">
     <div class="tl-wrap">
       <div class="tl-item">
         <div class="tl-dot" style="background:var(--red);box-shadow:0 0 0 2px var(--red);"></div>
         <div class="tl-time">17:00</div>
-        <div class="tl-event"><strong>⛪ Cerimonia Nuziale</strong><p>Cerimonia nella chiesa dell'Abbazia. Vi preghiamo di prendere posto entro le 16:45.</p></div>
+        <div class="tl-event"><strong id="tl1-title">⛪ Cerimonia Nuziale</strong><p id="tl1-desc">Cerimonia nella chiesa dell'Abbazia. Vi preghiamo di prendere posto entro le 16:45.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-time">17:45</div>
-        <div class="tl-event"><strong>🎉 Confetti &amp; Foto di gruppo</strong><p>Lancio del riso e foto ricordo all'ingresso della chiesa.</p></div>
+        <div class="tl-event"><strong id="tl2-title">🎉 Confetti &amp; Foto di gruppo</strong><p id="tl2-desc">Lancio del riso e foto ricordo all'ingresso della chiesa.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-time">18:15</div>
-        <div class="tl-event"><strong>🥂 Aperitivo di Benvenuto &amp; Buffet</strong><p>Aperitivo e gran buffet di antipasti misti nei giardini, mentre gli sposi scattano le foto.</p></div>
+        <div class="tl-event"><strong id="tl3-title">🥂 Aperitivo di Benvenuto &amp; Buffet</strong><p id="tl3-desc">Aperitivo e gran buffet di antipasti misti nei giardini, mentre gli sposi scattano le foto.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-dot" style="background:#27ae60;box-shadow:0 0 0 2px #27ae60;"></div>
         <div class="tl-time">19:30</div>
-        <div class="tl-event"><strong>🎊 Ingresso degli Sposi</strong><p>Arrivo degli sposi! Brindisi di benvenuto.</p></div>
+        <div class="tl-event"><strong id="tl4-title">🎊 Ingresso degli Sposi</strong><p id="tl4-desc">Arrivo degli sposi! Brindisi di benvenuto.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-time">19:45</div>
-        <div class="tl-event"><strong>🍽️ Cena Nuziale</strong><p>Cena con primi, secondi e intrattenimento tra le portate.</p></div>
+        <div class="tl-event"><strong id="tl5-title">🍽️ Cena Nuziale</strong><p id="tl5-desc">Cena con primi, secondi e intrattenimento tra le portate.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-dot" style="background:var(--gold-dark);box-shadow:0 0 0 2px var(--gold-dark);"></div>
         <div class="tl-time">21:30</div>
-        <div class="tl-event"><strong>🎂 Taglio della Torta</strong><p>Taglio della torta nuziale e brindisi.</p></div>
+        <div class="tl-event"><strong id="tl6-title">🎂 Taglio della Torta</strong><p id="tl6-desc">Taglio della torta nuziale e brindisi.</p></div>
       </div>
       <div class="tl-item">
         <div class="tl-dot" style="background:#8e44ad;box-shadow:0 0 0 2px #8e44ad;"></div>
         <div class="tl-time">22:00</div>
-        <div class="tl-event"><strong>💃 Musica e Danze</strong><p>Primo ballo e poi tutti in pista! Musica e balli fino a tarda notte.</p></div>
+        <div class="tl-event"><strong id="tl7-title">💃 Musica e Danze</strong><p id="tl7-desc">Primo ballo e poi tutti in pista! Musica e balli fino a tarda notte.</p></div>
       </div>
     </div>
   </div>
@@ -660,19 +695,19 @@
 <!-- ═══════════  TRAVEL  ═══════════ -->
 <section id="travel" class="fade-in">
   <span class="section-icon">ℹ️</span>
-  <h2 class="section-title">Info Utili</h2>
-  <div class="section-sub">Alloggio &amp; Trasporto</div>
+  <h2 class="section-title" id="travel-title">Info Utili</h2>
+  <div class="section-sub" id="travel-sub">Alloggio &amp; Trasporto</div>
 
   <div class="travel-cards">
     <div class="card travel-card">
-      <h3>🏨 Dove dormire</h3>
-      <p style="font-size:21px;color:var(--text);line-height:1.8;">Vi possiamo assistere noi con la ricerca dell'alloggio.</p>
-      <p style="font-size:20px;color:var(--gold-dark);font-style:italic;margin-top:8px;">🔄 In aggiornamento...</p>
+      <h3 id="travel-stay-title">🏨 Dove dormire</h3>
+      <p id="travel-stay-desc" style="font-size:21px;color:var(--text);line-height:1.8;">Vi possiamo assistere noi con la ricerca dell'alloggio.</p>
+      <p id="travel-stay-note" style="font-size:20px;color:var(--gold-dark);font-style:italic;margin-top:8px;">🔄 In aggiornamento...</p>
     </div>
     <div class="card travel-card">
-      <h3>🚌 Trasporto al venue</h3>
-      <p style="font-size:21px;color:var(--text);line-height:1.8;">Possibilità di navetta per raggiungere l'Abbazia di Sant'Elena.</p>
-      <p style="font-size:20px;color:var(--gold-dark);font-style:italic;margin-top:8px;">🔄 Ci stiamo lavorando...</p>
+      <h3 id="travel-transport-title">🚌 Trasporto al venue</h3>
+      <p id="travel-transport-desc" style="font-size:21px;color:var(--text);line-height:1.8;">Possibilità di navetta per raggiungere l'Abbazia di Sant'Elena.</p>
+      <p id="travel-transport-note" style="font-size:20px;color:var(--gold-dark);font-style:italic;margin-top:8px;">🔄 Ci stiamo lavorando...</p>
     </div>
   </div>
 </section>
@@ -680,10 +715,10 @@
 <!-- ═══════════  RSVP  ═══════════ -->
 <section id="rsvp" class="rsvp-section fade-in" style="max-width:none;padding:80px 24px;">
   <div style="max-width:800px;margin:0 auto;">
-    <div class="rsvp-banner">⚠️ IMPORTANTE — Conferma la tua presenza entro il 15 Maggio 2026 ⚠️</div>
+    <div class="rsvp-banner" id="rsvp-banner">⚠️ IMPORTANTE — Conferma la tua presenza entro il 25 Maggio 2026 ⚠️</div>
     <span class="section-icon">💌</span>
-    <h2 class="section-title">Conferma Presenza · RSVP</h2>
-    <div class="section-sub">Compila il modulo qui sotto — è fondamentale per l'organizzazione!</div>
+    <h2 class="section-title" id="rsvp-title">Conferma Presenza · RSVP</h2>
+    <div class="section-sub" id="rsvp-sub">Compila il modulo qui sotto — è fondamentale per l'organizzazione!</div>
 
     <iframe id="ms-form-iframe"
       src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__ZqbFXNURUNGUVZGS0pBN1VYNkZZOVJURkQwTDZBNy4u&embed=true"
@@ -694,13 +729,13 @@
       <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAa__ZqbFXNURUNGUVZGS0pBN1VYNkZZOVJURkQwTDZBNy4u"
          target="_blank" rel="noopener"
          style="color:var(--gold);font-size:14px;text-decoration:underline;">
-        Se il modulo non si carica, clicca qui per aprirlo →
+        <span id="rsvp-open-link-text">Se il modulo non si carica, clicca qui per aprirlo →</span>
       </a>
     </p>
 
     <div class="contact-bar" style="margin-top:24px;">
-      <p style="color:#a09888;">Per ulteriori informazioni:</p>
-      <p style="margin-top:6px;">
+      <p id="rsvp-contact-info" style="color:#a09888;">Per ulteriori informazioni:</p>
+      <p id="rsvp-contact-text" style="margin-top:6px;">
         📞 <a href="tel:+474793439037">+47 4793439037</a> (Luca — WhatsApp)
         &nbsp;·&nbsp;
         📞 <a href="tel:+393495604448">+39 3495604448</a> (Elena, madre dello sposo)
@@ -712,25 +747,25 @@
 <!-- ═══════════  FAQ  ═══════════ -->
 <section id="faq" class="fade-in">
   <span class="section-icon">❓</span>
-  <h2 class="section-title">Domande &amp; Risposte</h2>
-  <div class="section-sub">Tutto quello che devi sapere</div>
+  <h2 class="section-title" id="faq-title">Domande &amp; Risposte</h2>
+  <div class="section-sub" id="faq-sub">Tutto quello che devi sapere</div>
 
   <div class="card">
     <div class="faq-item">
-      <div class="faq-q">Qual è il dress code?</div>
-      <div class="faq-a">Semi-formale / Elegante. Luglio nelle Marche è caldo (30°C+), quindi tessuti leggeri vanno benissimo.</div>
+      <div class="faq-q" id="faq1-q">Qual è il dress code?</div>
+      <div class="faq-a" id="faq1-a">Semi-formale / Elegante. Luglio nelle Marche è caldo (30°C+), quindi tessuti leggeri vanno benissimo.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">C'è parcheggio al venue?</div>
-      <div class="faq-a">Sì, c'è posto per parcheggiare la macchina di fronte all'Abbazia.</div>
+      <div class="faq-q" id="faq2-q">C'è parcheggio al venue?</div>
+      <div class="faq-a" id="faq2-a">Sì, c'è posto per parcheggiare la macchina di fronte all'Abbazia.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">La cerimonia sarà in italiano?</div>
-      <div class="faq-a">La cerimonia sarà in italiano con i momenti chiave spiegati in inglese e cinese. Verrà fornito un programma bilingue.</div>
+      <div class="faq-q" id="faq3-q">La cerimonia sarà in italiano?</div>
+      <div class="faq-a" id="faq3-a">La cerimonia sarà in italiano con i momenti chiave spiegati in inglese e cinese. Verrà fornito un programma bilingue.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Com'è il clima?</div>
-      <div class="faq-a">Inizio luglio nelle Marche è soleggiato e caldo (28–32°C). Portate crema solare, occhiali da sole e bevete molto! I giardini dell'Abbazia hanno zone ombreggiate.</div>
+      <div class="faq-q" id="faq4-q">Com'è il clima?</div>
+      <div class="faq-a" id="faq4-a">Inizio luglio nelle Marche è soleggiato e caldo (28–32°C). Portate crema solare, occhiali da sole e bevete molto! I giardini dell'Abbazia hanno zone ombreggiate.</div>
     </div>
   </div>
 </section>
@@ -739,8 +774,8 @@
 <footer>
   <div class="xi">囍</div>
   <div class="names">Luca &amp; Kaia</div>
-  <p>5 Luglio 2026 · Abbazia di Sant'Elena</p>
-  <p style="margin-top:8px;font-size:13px;color:var(--text-muted);">Non vediamo l'ora di festeggiare insieme a voi!</p>
+  <p id="footer-date">5 Luglio 2026 · Abbazia di Sant'Elena</p>
+  <p id="footer-msg" style="margin-top:8px;font-size:13px;color:var(--text-muted);">Non vediamo l'ora di festeggiare insieme a voi!</p>
   <p style="margin-top:16px;font-size:11px;color:#bbb;">Made with ♥</p>
 </footer>
 
@@ -749,13 +784,386 @@
 (function() {
   "use strict";
 
+  var translations = {
+    it: {
+      htmlLang: 'it',
+      pageTitle: 'Luca & Kaia — 5 Luglio 2026',
+      pageDescription: "Matrimonio di Luca Marchetti & Kaia — Domenica 5 Luglio 2026 · Abbazia di Sant'Elena, Serra San Quirico",
+      invitationImages: ['it_page_1.png', 'it_page_2.png', 'it_page_3.png'],
+      copyIbanBtnDefault: '📋 Copia IBAN',
+      copyIbanBtnDone: '✓ Copiato!',
+      navInvitation: 'Invito',
+      navGift: 'Regalo',
+      navSchedule: 'Programma',
+      navTravel: 'Info Utili',
+      navRsvp: 'RSVP',
+      navFaq: 'Q&A',
+      heroTagline: '我们诚挚地邀请您参加我们的婚礼',
+      heroPre: 'Si Sposano',
+      heroDate: 'Domenica, 5 Luglio 2026',
+      cdDays: 'Giorni',
+      cdHours: 'Ore',
+      cdMins: 'Minuti',
+      cdSecs: 'Secondi',
+      heroRsvpCta: 'Premi qui per RSVP ↓',
+      invitationTitle: 'Il Nostro Invito',
+      invitationSub: "L'invito cartaceo originale",
+      invitationPage1Label: 'Cerimonia',
+      invitationPage2Label: 'Menu',
+      invitationPage3Label: 'Programma',
+      invLocationLabel: '📍 LOCATION',
+      invMapLink: 'Apri su Google Maps →',
+      invContactsLabel: '📞 CONTATTI',
+      invContactsText: '📞 <a href="tel:+474793439037" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+47 4793439037</a> (Luca — WhatsApp)<br>📞 <a href="tel:+393495604448" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+39 3495604448</a> (Elena, madre dello sposo)',
+      invRsvpLabel: '⏰ RSVP',
+      invRsvpText: 'Si prega di confermare entro il <strong>25 Maggio 2026</strong>',
+      giftTitle: 'Regalo',
+      giftSub: 'Un pensiero dal cuore',
+      giftText: 'La vostra presenza al nostro matrimonio è già il dono più prezioso.<br>Non abbiamo una lista nozze tradizionale.<br><br>Se vi fa piacere farci un regalo, un pensiero sul nostro IBAN sarà davvero gradito e ci aiuterà a iniziare la nostra vita insieme.',
+      ibanName: 'Intestato a <strong>Luca Marchetti</strong>',
+      ibanNote: 'Nella causale vi chiediamo gentilmente di scrivere il vostro nome,<br>in modo da poter ringraziare ognuno di voi con affetto.',
+      scheduleTitle: 'Programma',
+      scheduleSub: 'Wedding Timeline · 05.07.2026',
+      tl1Title: '⛪ Cerimonia Nuziale',
+      tl1Desc: "Cerimonia nella chiesa dell'Abbazia. Vi preghiamo di prendere posto entro le 16:45.",
+      tl2Title: '🎉 Confetti & Foto di gruppo',
+      tl2Desc: "Lancio del riso e foto ricordo all'ingresso della chiesa.",
+      tl3Title: '🥂 Aperitivo di Benvenuto & Buffet',
+      tl3Desc: 'Aperitivo e gran buffet di antipasti misti nei giardini, mentre gli sposi scattano le foto.',
+      tl4Title: '🎊 Ingresso degli Sposi',
+      tl4Desc: 'Arrivo degli sposi! Brindisi di benvenuto.',
+      tl5Title: '🍽️ Cena Nuziale',
+      tl5Desc: 'Cena con primi, secondi e intrattenimento tra le portate.',
+      tl6Title: '🎂 Taglio della Torta',
+      tl6Desc: 'Taglio della torta nuziale e brindisi.',
+      tl7Title: '💃 Musica e Danze',
+      tl7Desc: 'Primo ballo e poi tutti in pista! Musica e balli fino a tarda notte.',
+      travelTitle: 'Info Utili',
+      travelSub: 'Alloggio & Trasporto',
+      travelStayTitle: '🏨 Dove dormire',
+      travelStayDesc: "Vi possiamo assistere noi con la ricerca dell'alloggio.",
+      travelStayNote: '🔄 In aggiornamento...',
+      travelTransportTitle: '🚌 Trasporto al venue',
+      travelTransportDesc: "Possibilità di navetta per raggiungere l'Abbazia di Sant'Elena.",
+      travelTransportNote: '🔄 Ci stiamo lavorando...',
+      rsvpBanner: '⚠️ IMPORTANTE — Conferma la tua presenza entro il 25 Maggio 2026 ⚠️',
+      rsvpTitle: 'Conferma Presenza · RSVP',
+      rsvpSub: "Compila il modulo qui sotto — è fondamentale per l'organizzazione!",
+      rsvpOpenLinkText: 'Se il modulo non si carica, clicca qui per aprirlo →',
+      rsvpContactInfo: 'Per ulteriori informazioni:',
+      rsvpContactText: '📞 <a href="tel:+474793439037">+47 4793439037</a> (Luca — WhatsApp) &nbsp;·&nbsp; 📞 <a href="tel:+393495604448">+39 3495604448</a> (Elena, madre dello sposo)',
+      faqTitle: 'Domande & Risposte',
+      faqSub: 'Tutto quello che devi sapere',
+      faq1Q: 'Qual è il dress code?',
+      faq1A: 'Semi-formale / Elegante. Luglio nelle Marche è caldo (30°C+), quindi tessuti leggeri vanno benissimo.',
+      faq2Q: "C'è parcheggio al venue?",
+      faq2A: "Sì, c'è posto per parcheggiare la macchina di fronte all'Abbazia.",
+      faq3Q: 'La cerimonia sarà in italiano?',
+      faq3A: 'La cerimonia sarà in italiano con i momenti chiave spiegati in inglese e cinese. Verrà fornito un programma bilingue.',
+      faq4Q: "Com'è il clima?",
+      faq4A: "Inizio luglio nelle Marche è soleggiato e caldo (28-32°C). Portate crema solare, occhiali da sole e bevete molto! I giardini dell'Abbazia hanno zone ombreggiate.",
+      footerDate: "5 Luglio 2026 · Abbazia di Sant'Elena",
+      footerMsg: "Non vediamo l'ora di festeggiare insieme a voi!"
+    },
+    en: {
+      htmlLang: 'en',
+      pageTitle: 'Luca & Kaia — July 5, 2026',
+      pageDescription: "Wedding of Luca Marchetti & Kaia — Sunday, July 5, 2026 · Abbazia di Sant'Elena, Serra San Quirico",
+      invitationImages: ['en_page_1.png', 'en_page_2.png', 'en_page_3.png'],
+      copyIbanBtnDefault: '📋 Copy IBAN',
+      copyIbanBtnDone: '✓ Copied!',
+      navInvitation: 'Invitation',
+      navGift: 'Gift',
+      navSchedule: 'Schedule',
+      navTravel: 'Travel Info',
+      navRsvp: 'RSVP',
+      navFaq: 'Q&A',
+      heroTagline: 'We warmly invite you to our wedding',
+      heroPre: 'We Are Getting Married',
+      heroDate: 'Sunday, July 5, 2026',
+      cdDays: 'Days',
+      cdHours: 'Hours',
+      cdMins: 'Minutes',
+      cdSecs: 'Seconds',
+      heroRsvpCta: 'Push here to RSVP ↓',
+      invitationTitle: 'Our Invitation',
+      invitationSub: 'Original invitation in PDF format',
+      invitationPage1Label: 'Ceremony',
+      invitationPage2Label: 'Menu',
+      invitationPage3Label: 'Timeline',
+      invLocationLabel: '📍 LOCATION',
+      invMapLink: 'Open in Google Maps →',
+      invContactsLabel: '📞 CONTACTS',
+      invContactsText: '📞 <a href="tel:+474793439037" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+47 4793439037</a> (Luca — WhatsApp)<br>📞 <a href="tel:+393495604448" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+39 3495604448</a> (Elena, groom\'s mother)',
+      invRsvpLabel: '⏰ RSVP',
+      invRsvpText: 'Please confirm by <strong>May 25, 2026</strong>',
+      giftTitle: 'Gift',
+      giftSub: 'A heartfelt thought',
+      giftText: 'Your presence at our wedding is already the most precious gift.<br>We do not have a traditional wedding registry.<br><br>If you would like to give us a gift, a contribution to our IBAN would be truly appreciated and will help us start our life together.',
+      ibanName: 'Account holder: <strong>Luca Marchetti</strong>',
+      ibanNote: 'In the transfer note, please include your name,<br>so we can personally thank each of you with love.',
+      scheduleTitle: 'Schedule',
+      scheduleSub: 'Wedding Timeline · 05.07.2026',
+      tl1Title: '⛪ Wedding Ceremony',
+      tl1Desc: 'Ceremony in the Abbey church. Please be seated by 4:45 PM.',
+      tl2Title: '🎉 Confetti & Group Photos',
+      tl2Desc: 'Rice toss and group photos at the church entrance.',
+      tl3Title: '🥂 Welcome Aperitif & Buffet',
+      tl3Desc: 'Welcome drinks and buffet in the gardens while the couple takes photos.',
+      tl4Title: '🎊 Couple Entrance',
+      tl4Desc: 'The newlyweds arrive! Welcome toast.',
+      tl5Title: '🍽️ Wedding Dinner',
+      tl5Desc: 'Dinner with courses and entertainment between servings.',
+      tl6Title: '🎂 Cake Cutting',
+      tl6Desc: 'Wedding cake cutting and toast.',
+      tl7Title: '💃 Music & Dancing',
+      tl7Desc: 'First dance, then everyone on the dance floor into the night.',
+      travelTitle: 'Travel Info',
+      travelSub: 'Accommodation & Transport',
+      travelStayTitle: '🏨 Where to stay',
+      travelStayDesc: 'We can help you find accommodation options.',
+      travelStayNote: '🔄 Updates coming soon...',
+      travelTransportTitle: '🚌 Venue transport',
+      travelTransportDesc: 'Shuttle options may be available to reach Abbazia di Sant\'Elena.',
+      travelTransportNote: '🔄 We are working on it...',
+      rsvpBanner: '⚠️ IMPORTANT — Please confirm your attendance by May 25, 2026 ⚠️',
+      rsvpTitle: 'RSVP Confirmation',
+      rsvpSub: 'Please fill in the form below — it is essential for our planning!',
+      rsvpOpenLinkText: 'If the form does not load, click here to open it →',
+      rsvpContactInfo: 'For more information:',
+      rsvpContactText: '📞 <a href="tel:+474793439037">+47 4793439037</a> (Luca — WhatsApp) &nbsp;·&nbsp; 📞 <a href="tel:+393495604448">+39 3495604448</a> (Elena, groom\'s mother)',
+      faqTitle: 'Questions & Answers',
+      faqSub: 'Everything you need to know',
+      faq1Q: 'What is the dress code?',
+      faq1A: 'Semi-formal / Elegant. July in Le Marche is warm (30°C+), so light fabrics are perfect.',
+      faq2Q: 'Is there parking at the venue?',
+      faq2A: 'Yes, parking is available in front of the Abbey.',
+      faq3Q: 'Will the ceremony be in Italian?',
+      faq3A: 'The ceremony will be in Italian, with key moments explained in English and Chinese. A bilingual program will be provided.',
+      faq4Q: 'What is the weather like?',
+      faq4A: 'Early July in Le Marche is sunny and warm (28-32°C). Bring sunscreen, sunglasses, and stay hydrated. The Abbey gardens include shaded areas.',
+      footerDate: "July 5, 2026 · Abbazia di Sant'Elena",
+      footerMsg: 'We cannot wait to celebrate with you!'
+    },
+    zh: {
+      htmlLang: 'zh',
+      pageTitle: 'Luca 与 Kaia 婚礼 — 2026年7月5日',
+      pageDescription: "Luca Marchetti 与 Kaia 婚礼邀请 · 2026年7月5日星期日 · Abbazia di Sant'Elena, Serra San Quirico",
+      invitationImages: ['zh_page_1.png', 'zh_page_2.png', 'zh_page_3.png'],
+      copyIbanBtnDefault: '📋 复制 IBAN',
+      copyIbanBtnDone: '✓ 已复制',
+      navInvitation: '请柬',
+      navGift: '礼金',
+      navSchedule: '流程',
+      navTravel: '出行信息',
+      navRsvp: '回执',
+      navFaq: '问答',
+      heroTagline: '我们诚挚地邀请您参加我们的婚礼',
+      heroPre: '我们将步入婚姻',
+      heroDate: '2026年7月5日，星期日',
+      cdDays: '天',
+      cdHours: '小时',
+      cdMins: '分钟',
+      cdSecs: '秒',
+      heroRsvpCta: '点击这里填写 RSVP ↓',
+      invitationTitle: '我们的请柬',
+      invitationSub: '婚礼请柬页面',
+      invitationPage1Label: '仪式',
+      invitationPage2Label: '菜单',
+      invitationPage3Label: '流程',
+      invLocationLabel: '📍 地点',
+      invMapLink: '在 Google 地图中打开 →',
+      invContactsLabel: '📞 联系方式',
+      invContactsText: '📞 <a href="tel:+474793439037" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+47 4793439037</a> (Luca — WhatsApp)<br>📞 <a href="tel:+393495604448" style="color:var(--gold-dark);text-decoration:none;font-weight:600;">+39 3495604448</a> (Elena，新郎母亲)',
+      invRsvpLabel: '⏰ 回执',
+      invRsvpText: '请于 <strong>2026年5月25日前</strong> 确认是否出席',
+      giftTitle: '礼金',
+      giftSub: '来自心意的祝福',
+      giftText: '你们亲自到来，已经是我们最珍贵的礼物。<br>我们没有传统婚礼礼物清单。<br><br>如果您愿意送上祝福，可通过我们的 IBAN 转账支持，我们将非常感激，这也会帮助我们开启新生活。',
+      ibanName: '收款人：<strong>Luca Marchetti</strong>',
+      ibanNote: '转账备注请写上您的姓名，<br>方便我们向每一位来宾表达感谢。',
+      scheduleTitle: '婚礼流程',
+      scheduleSub: 'Wedding Timeline · 05.07.2026',
+      tl1Title: '⛪ 婚礼仪式',
+      tl1Desc: '仪式将在修道院教堂举行，请于 16:45 前入座。',
+      tl2Title: '🎉 合影与庆祝',
+      tl2Desc: '教堂门口抛米、合影留念。',
+      tl3Title: '🥂 欢迎酒会与自助前菜',
+      tl3Desc: '花园区欢迎酒会与自助前菜，同时新人拍照。',
+      tl4Title: '🎊 新人入场',
+      tl4Desc: '新人入场并欢迎祝酒。',
+      tl5Title: '🍽️ 婚宴晚餐',
+      tl5Desc: '正式晚宴，穿插节目与互动。',
+      tl6Title: '🎂 切蛋糕',
+      tl6Desc: '婚礼蛋糕仪式与祝酒。',
+      tl7Title: '💃 音乐与舞会',
+      tl7Desc: '第一支舞后，大家一起尽情跳舞。',
+      travelTitle: '出行信息',
+      travelSub: '住宿与交通',
+      travelStayTitle: '🏨 住宿建议',
+      travelStayDesc: '我们可以协助您寻找合适住宿。',
+      travelStayNote: '🔄 正在更新中...',
+      travelTransportTitle: '🚌 前往婚礼场地交通',
+      travelTransportDesc: '可安排接驳车前往 Abbazia di Sant\'Elena。',
+      travelTransportNote: '🔄 正在筹备中...',
+      rsvpBanner: '⚠️ 重要提醒 — 请于 2026年5月25日前确认是否出席 ⚠️',
+      rsvpTitle: '出席确认 · RSVP',
+      rsvpSub: '请填写下方表单，这对我们的安排非常重要！',
+      rsvpOpenLinkText: '若表单未加载，请点击这里打开 →',
+      rsvpContactInfo: '如需更多信息：',
+      rsvpContactText: '📞 <a href="tel:+474793439037">+47 4793439037</a> (Luca — WhatsApp) &nbsp;·&nbsp; 📞 <a href="tel:+393495604448">+39 3495604448</a> (Elena，新郎母亲)',
+      faqTitle: '常见问题',
+      faqSub: '您可能想了解的内容',
+      faq1Q: '着装要求是什么？',
+      faq1A: '建议半正式/优雅着装。7月的马尔凯地区较热（30°C+），轻薄面料更舒适。',
+      faq2Q: '场地可以停车吗？',
+      faq2A: '可以，修道院正前方有停车位。',
+      faq3Q: '仪式会使用意大利语吗？',
+      faq3A: '仪式主要为意大利语，关键环节会有英语和中文说明，并提供双语流程。',
+      faq4Q: '当地天气如何？',
+      faq4A: '7月初天气晴朗温暖（28-32°C）。建议携带防晒霜、太阳镜并注意补水。修道院花园有遮荫区域。',
+      footerDate: "2026年7月5日 · Abbazia di Sant'Elena",
+      footerMsg: '期待与你们共同庆祝这一天！'
+    }
+  };
+
+  var currentLang = 'it';
+  window.weddingTranslations = translations;
+
+  function setText(id, value, asHtml) {
+    var el = document.getElementById(id);
+    if (!el || typeof value === 'undefined') return;
+    if (asHtml) el.innerHTML = value;
+    else el.textContent = value;
+  }
+
+  function setLanguage(lang) {
+    var t = translations[lang] || translations.it;
+    currentLang = lang;
+    window.currentWeddingLang = lang;
+
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+
+    var metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) metaDescription.setAttribute('content', t.pageDescription);
+
+    setText('nav-invitation', t.navInvitation);
+    setText('nav-gift', t.navGift);
+    setText('nav-schedule', t.navSchedule);
+    setText('nav-travel', t.navTravel);
+    setText('nav-rsvp', t.navRsvp);
+    setText('nav-faq', t.navFaq);
+
+    setText('hero-tagline', t.heroTagline);
+    setText('hero-pre', t.heroPre);
+    setText('hero-date', t.heroDate);
+    setText('cd-label-days', t.cdDays);
+    setText('cd-label-hours', t.cdHours);
+    setText('cd-label-mins', t.cdMins);
+    setText('cd-label-secs', t.cdSecs);
+    setText('hero-rsvp-cta', t.heroRsvpCta);
+
+    setText('invitation-title', t.invitationTitle);
+    setText('invitation-sub', t.invitationSub);
+    setText('inv-page-1-label', t.invitationPage1Label);
+    setText('inv-page-2-label', t.invitationPage2Label);
+    setText('inv-page-3-label', t.invitationPage3Label);
+
+    var page1 = document.getElementById('inv-page-1');
+    var page2 = document.getElementById('inv-page-2');
+    var page3 = document.getElementById('inv-page-3');
+    if (t.invitationImages && t.invitationImages.length >= 3) {
+      if (page1) page1.src = t.invitationImages[0];
+      if (page2) page2.src = t.invitationImages[1];
+      if (page3) page3.src = t.invitationImages[2];
+    }
+
+    setText('inv-location-label', t.invLocationLabel);
+    setText('inv-map-link', t.invMapLink);
+    setText('inv-contacts-label', t.invContactsLabel);
+    setText('inv-contacts-text', t.invContactsText, true);
+    setText('inv-rsvp-label', t.invRsvpLabel);
+    setText('inv-rsvp-text', t.invRsvpText, true);
+
+    setText('gift-title', t.giftTitle);
+    setText('gift-sub', t.giftSub);
+    setText('gift-text', t.giftText, true);
+    setText('iban-name', t.ibanName, true);
+    setText('iban-note', t.ibanNote, true);
+    setText('copy-iban-btn', t.copyIbanBtnDefault);
+
+    setText('schedule-title', t.scheduleTitle);
+    setText('schedule-sub', t.scheduleSub);
+    setText('tl1-title', t.tl1Title);
+    setText('tl1-desc', t.tl1Desc);
+    setText('tl2-title', t.tl2Title);
+    setText('tl2-desc', t.tl2Desc);
+    setText('tl3-title', t.tl3Title);
+    setText('tl3-desc', t.tl3Desc);
+    setText('tl4-title', t.tl4Title);
+    setText('tl4-desc', t.tl4Desc);
+    setText('tl5-title', t.tl5Title);
+    setText('tl5-desc', t.tl5Desc);
+    setText('tl6-title', t.tl6Title);
+    setText('tl6-desc', t.tl6Desc);
+    setText('tl7-title', t.tl7Title);
+    setText('tl7-desc', t.tl7Desc);
+
+    setText('travel-title', t.travelTitle);
+    setText('travel-sub', t.travelSub);
+    setText('travel-stay-title', t.travelStayTitle);
+    setText('travel-stay-desc', t.travelStayDesc);
+    setText('travel-stay-note', t.travelStayNote);
+    setText('travel-transport-title', t.travelTransportTitle);
+    setText('travel-transport-desc', t.travelTransportDesc);
+    setText('travel-transport-note', t.travelTransportNote);
+
+    setText('rsvp-banner', t.rsvpBanner);
+    setText('rsvp-title', t.rsvpTitle);
+    setText('rsvp-sub', t.rsvpSub);
+    setText('rsvp-open-link-text', t.rsvpOpenLinkText);
+    setText('rsvp-contact-info', t.rsvpContactInfo);
+    setText('rsvp-contact-text', t.rsvpContactText, true);
+
+    setText('faq-title', t.faqTitle);
+    setText('faq-sub', t.faqSub);
+    setText('faq1-q', t.faq1Q);
+    setText('faq1-a', t.faq1A);
+    setText('faq2-q', t.faq2Q);
+    setText('faq2-a', t.faq2A);
+    setText('faq3-q', t.faq3Q);
+    setText('faq3-a', t.faq3A);
+    setText('faq4-q', t.faq4Q);
+    setText('faq4-a', t.faq4A);
+
+    setText('footer-date', t.footerDate);
+    setText('footer-msg', t.footerMsg);
+
+    localStorage.setItem('weddingLang', lang);
+  }
+
   /* ── Mobile menu toggle ── */
   var toggle = document.querySelector('.nav-toggle');
   var links  = document.querySelector('.nav-links');
-  toggle.addEventListener('click', function() { links.classList.toggle('open'); });
-  links.querySelectorAll('a').forEach(function(a) {
-    a.addEventListener('click', function() { links.classList.remove('open'); });
-  });
+  if (toggle && links) {
+    toggle.addEventListener('click', function() { links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() { links.classList.remove('open'); });
+    });
+  }
+
+  /* ── Language selector ── */
+  var languageSelect = document.getElementById('language-select');
+  var savedLang = localStorage.getItem('weddingLang') || 'it';
+  if (!translations[savedLang]) savedLang = 'it';
+  if (languageSelect) {
+    languageSelect.value = savedLang;
+    languageSelect.addEventListener('change', function(e) {
+      setLanguage(e.target.value);
+    });
+  }
+  setLanguage(savedLang);
 
   /* ── Countdown ── */
   var weddingDate = new Date('2026-07-05T17:00:00+02:00');
@@ -795,9 +1203,13 @@
 function copyIBAN() {
   var iban = document.getElementById('iban-code').textContent;
   navigator.clipboard.writeText(iban).then(function() {
-    var btn = document.querySelector('.btn-copy');
-    btn.textContent = '✓ Copiato!';
-    setTimeout(function() { btn.textContent = '📋 Copia IBAN'; }, 2000);
+    var btn = document.getElementById('copy-iban-btn');
+    if (!btn) return;
+    var language = window.currentWeddingLang || 'it';
+    var dict = window.weddingTranslations || {};
+    var t = dict[language] || dict.it || { copyIbanBtnDone: '✓ Copied', copyIbanBtnDefault: '📋 Copy IBAN' };
+    btn.textContent = t.copyIbanBtnDone;
+    setTimeout(function() { btn.textContent = t.copyIbanBtnDefault; }, 2000);
   });
 }
 </script>
